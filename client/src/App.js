@@ -22,7 +22,7 @@ const App = () => {
   }, [currentId, dispatch])
 
   return (
-    <Container maxWidth="lg">
+    <Container>
       <AppBar className={classes.appBar} position="static" color="inherit">
         <Typography className={classes.heading} variant="h2" align="center">
           Memories
@@ -38,6 +38,7 @@ const App = () => {
         <Container>
           <Grid
             container
+            className={classes.mainContainer}
             justify="space-between"
             alignItems="stretch"
             spacing={4}
