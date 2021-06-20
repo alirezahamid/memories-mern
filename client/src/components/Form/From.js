@@ -46,7 +46,7 @@ const From = ({ setCurrentId, currentId }) => {
   }
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} spacing={2}>
       <form
         autoComplete="off"
         noValidate
@@ -57,6 +57,7 @@ const From = ({ setCurrentId, currentId }) => {
           {currentId ? "Editing" : "Creating"} a Memory
         </Typography>
         <TextField
+          style={{ padding: "10px 0 0 0" }}
           name="creator"
           variant="outlined"
           label="Creator"
@@ -69,6 +70,7 @@ const From = ({ setCurrentId, currentId }) => {
         <TextField
           name="title"
           variant="outlined"
+          style={{ padding: "10px 0 0 0" }}
           label="Title"
           fullWidth
           value={postData.title}
@@ -77,6 +79,7 @@ const From = ({ setCurrentId, currentId }) => {
         <TextField
           name="message"
           variant="outlined"
+          style={{ padding: "10px 0 0 0" }}
           label="Message"
           fullWidth
           value={postData.message}
@@ -87,6 +90,7 @@ const From = ({ setCurrentId, currentId }) => {
         <TextField
           name="tags"
           variant="outlined"
+          style={{ padding: "10px 0 0 0" }}
           label="Tags"
           fullWidth
           value={postData.tags}
