@@ -13,7 +13,7 @@ import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt"
 import DeleteIcon from "@material-ui/icons/Delete"
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz"
 import { useDispatch } from "react-redux"
-import { deletePost } from "../../../redux/actions/posts"
+import { deletePost, likePost } from "../../../redux/actions/posts"
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles()
@@ -54,7 +54,11 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button style={{ color: "primary" }} size="small" onClick={() => {}}>
+        <Button
+          style={{ color: "primary" }}
+          size="small"
+          onClick={() => dispatch(likePost(post._id))}
+        >
           <ThumbUpAltIcon fontSize="small" />
           Like
           {" " + post.likeCount}
