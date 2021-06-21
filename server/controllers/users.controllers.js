@@ -26,13 +26,22 @@ export const signin = async (req, res) => {
       }
     )
 
-    res.status(200).json({ result: existingUser, token })
+    res
+      .status(200)
+      .json({
+        result: {
+          name: existingUser.name,
+          email: existingUser.email,
+          _id: existingUser._id,
+        },
+        token,
+      })
   } catch (error) {
     res.status(500).json({ message: "Something went wrong." })
   }
 }
 export const signup = async (req, res) => {
-  const { email, password, confirmPassword, firstName, LastName } = req.body
+  const { email, password, confirmPassword, firstName, lastName } = req.body
   try {
     const existingUser = await User.findOne({ email })
     if (existingUser)
@@ -46,9 +55,8 @@ export const signup = async (req, res) => {
     const result = await User.create({
       email,
       password: hashedPassword,
-      name: `${firstName} ${LastName}`,
+      name: `${firstName} ${lastName}`,
     })
-
     const token = jwt.sign(
       { email: result.email, id: result._id },
       process.env.ACCESS_TOKEN_SECRET,
@@ -57,7 +65,10 @@ export const signup = async (req, res) => {
       }
     )
 
-    res.status(201).json({ result, token })
+    res.status(201).json({
+      result: { email: result.email, name: result.name, _id: result._id },
+      token,
+    })
   } catch (error) {
     res.status(404).json({ message: "Something went wrong." })
   }

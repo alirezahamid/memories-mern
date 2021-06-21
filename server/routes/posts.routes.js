@@ -6,7 +6,7 @@ import {
   deletePost,
   likePost,
 } from "../controllers/posts.controllers.js"
-import auth from "../middleware/auth"
+import auth from "../middleware/auth.js"
 
 const router = express.Router()
 
