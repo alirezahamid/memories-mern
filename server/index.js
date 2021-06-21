@@ -6,6 +6,7 @@ import "dotenv/config"
 import "./helpers/db_config.js"
 
 import postRoutes from "./routes/posts.routes.js"
+import userRoutes from "./routes/user.routes.js"
 
 const app = express()
 
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }))
 app.use(cors())
 
 app.use("/posts", postRoutes)
+app.use("/user", userRoutes)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`)
