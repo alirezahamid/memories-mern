@@ -1,13 +1,29 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import { Link, useHistory, useLocation } from "react-router-dom"
 import { AppBar, Typography, Toolbar, Avatar, Button } from "@material-ui/core"
-import UseStyles from "./styles"
+import useStyles from "./styles"
 import memories from "../../images/memories.png"
+import { useDispatch } from "react-redux"
 
-const styles = () => {
-  const classes = UseStyles()
+const Styles = () => {
+  const classes = useStyles()
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")))
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const location = useLocation()
 
-  const user = null
+  const logout = () => {
+    dispatch({ type: "LOGOUT" })
+    history.push("/")
+    setUser(null)
+  }
+
+  useEffect(() => {
+    const token = user?.token
+    // JWT ...
+
+    setUser(JSON.parse(localStorage.getItem("profile")))
+  }, [location])
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
@@ -34,9 +50,9 @@ const styles = () => {
             <Avatar
               className={classes.purple}
               alt={user.result.name}
-              src={user.result.image}
+              src={user.result.imageUrl}
             >
-              {user.result.name.CharAt(0)}
+              {user.result.name.charAt(0)}
             </Avatar>
             <Typography className={classes.userName} variant="h6">
               {user.result.name}
@@ -45,8 +61,9 @@ const styles = () => {
               variant="contained"
               className={classes.logout}
               color="secondary"
+              onClick={logout}
             >
-              Sign in
+              Log out
             </Button>
           </div>
         ) : (
@@ -58,7 +75,7 @@ const styles = () => {
             color="primary"
             onClick={() => {}}
           >
-            Log out
+            Sign in
           </Button>
         )}
       </Toolbar>
@@ -66,4 +83,4 @@ const styles = () => {
   )
 }
 
-export default styles
+export default Styles
