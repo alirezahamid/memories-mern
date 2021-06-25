@@ -30,7 +30,7 @@ const Home = () => {
   const history = useHistory()
   const page = query.get("page") || 1
   const searchQuery = query.get("searchQuery")
-  const [search, setSearch] = useState()
+  const [search, setSearch] = useState("")
   const [tags, setTags] = useState([])
 
   useEffect(() => {
@@ -42,8 +42,13 @@ const Home = () => {
   }, [currentId, dispatch])
 
   const searchPost = () => {
-    if (search.trim()) {
+    if (search.trim() || tags) {
       dispatch(getPostsBySearch({ search, tags: tags.join(",") }))
+      history.push(
+        `/posts/search?searchQuery=${search || "none"}&tags=${
+          tags.join(",") || "none"
+        }`
+      )
     } else {
       history.push("/")
     }
