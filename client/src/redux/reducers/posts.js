@@ -6,24 +6,32 @@ import {
   UPDATE,
 } from "../constants/actionTypes"
 
-const reducer = (posts = [], action) => {
+const reducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_ALL:
-      return action.payload
+      return {
+        ...state,
+        posts: action.payload.data,
+        currentPage: action.payload.currentPage,
+        numberOfPages: action.payload.numberOfPages,
+      }
     case FETCH_BY_SEARCH:
-      return action.payload
+      return {
+        ...state,
+        posts: action.payload,
+      }
     case CREATE:
-      return [...posts, action.payload]
+      return [...state, action.payload]
     case UPDATE:
-      return posts.map((post) => {
+      return state.map((post) => {
         return post._id === action.payload._id ? action.payload : post
       })
     case DELETE:
-      return posts.filter((post) => {
+      return state.filter((post) => {
         return post._id !== action.payload
       })
     default:
-      return posts
+      return state
   }
 }
 export default reducer
