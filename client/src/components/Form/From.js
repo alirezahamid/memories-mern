@@ -55,7 +55,7 @@ const From = ({ setCurrentId, currentId }) => {
   }
 
   return (
-    <Paper className={classes.paper} spacing={2}>
+    <Paper className={classes.paper} spacing={2} elevation={6}>
       <form
         autoComplete="off"
         noValidate
