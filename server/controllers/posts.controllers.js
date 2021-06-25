@@ -1,9 +1,19 @@
 import mongoose from "mongoose"
 import PostMessage from "../models/PostMessage.js"
 
+export const getPostById = async (req, res) => {
+  const { id } = req.params
+
+  try {
+    const post = await PostMessage.findById(id)
+    res.status(200).json(post)
+  } catch (error) {
+    res.status(404).json({ message: error.message })
+  }
+}
+
 export const getPosts = async (req, res) => {
   const { page } = req.query
-
   try {
     const LIMIT = 8
     const startIndex = (Number(page) - 1) * LIMIT // (2 - 1) * 8  => 8
